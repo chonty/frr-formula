@@ -6,6 +6,10 @@ frr:
   package_url: False
   # Hash to proove the integrity of the package file. (Only used with package_url.)
   package_hash: False
+  # Custom repo RPM url for CentOS.  https://rpm.frrouting.org/
+  custom_repo_rpm: False
+  # Custom repo name.  Valid names: frr-6-repo, frr-7-repo or frr-stable-repo
+  custom_repo_name: False
   service: frr
   conf_dir: /etc/frr
   log_dir: /var/log/frr

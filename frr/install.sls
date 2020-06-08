@@ -6,6 +6,15 @@
 {%-   set use_repo = True %}
 {%- endif %}
 
+{%- set use_custom_repo = map.custom_repo_rpm %}
+
+{%- if use_custom_repo %}
+frr_custom_repo:
+  pkg.installed:
+    - sources:
+        - {{ map.custom_repo_name }}: {{ map.custom_repo_rpm }}
+{%- endif %}
+
 {%- if not use_repo %}
 # Cache the file in order to verify its integrity:
 frr_package_cached:
@@ -18,6 +27,10 @@ frr_package:
   pkg.{% if map.package_auto_upgrade and not map.package_url %}latest{% else %}installed{% endif %}:
 {%- if use_repo %}
     - name: {{ map.package }}
+{%-   if use_custom_repo %}
+    - require:
+      - pkg: frr_custom_repo
+{%-   endif %}
 {%- else %}
     - sources:
       - {{ map.package }}: {{ map.package_url }}

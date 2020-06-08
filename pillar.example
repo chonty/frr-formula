@@ -12,6 +12,10 @@ frr:
     # The name of the package
     package: frr
     package_auto_upgrade: False
+    # For CentOS, install the repo.
+    # Set custom_repo_rpm to the URL matching your CentOS release from https://rpm.frrouting.org/
+    # custom_repo_rpm: https://rpm.frrouting.org/repo/frr-stable-repo-1-0.el8.noarch.rpm
+    # custom_repo_name: frr-stable-repo
     # Used to fetch FRR directly from the releases page on GitHub.
     package_url: False
     #package_url: https://github.com/FRRouting/frr/releases/download/frr-6.0/frr_6.0-1.debian9+1_arm64.deb
