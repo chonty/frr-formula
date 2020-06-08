@@ -13,6 +13,8 @@ frr_custom_repo:
   pkg.installed:
     - sources:
         - {{ map.custom_repo_name }}: {{ map.custom_repo_rpm }}
+    - require_in:
+      - pkg: frr_package
 {%- endif %}
 
 {%- if not use_repo %}
@@ -27,10 +29,6 @@ frr_package:
   pkg.{% if map.package_auto_upgrade and not map.package_url %}latest{% else %}installed{% endif %}:
 {%- if use_repo %}
     - name: {{ map.package }}
-{%-   if use_custom_repo %}
-    - require:
-      - pkg: frr_custom_repo
-{%-   endif %}
 {%- else %}
     - sources:
       - {{ map.package }}: {{ map.package_url }}
